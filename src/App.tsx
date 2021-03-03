@@ -1,18 +1,15 @@
-import { Redirect, Route } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import aituBridge from '@btsd/aitu-bridge';
 import {
   IonApp,
-  IonIcon,
-  IonLabel,
-  IonRouterOutlet,
-  IonTabBar,
-  IonTabButton,
-  IonTabs,
+  IonSlides,
+  IonSlide,
+  IonContent,
+  IonButton,
+  IonText,
 } from '@ionic/react';
-import { IonReactRouter } from '@ionic/react-router';
-import { ellipse, square, triangle } from 'ionicons/icons';
-import Tab1 from './pages/Tab1';
-import Tab2 from './pages/Tab2';
-import Tab3 from './pages/Tab3';
+
+import './App.css';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -33,41 +30,104 @@ import '@ionic/react/css/display.css';
 /* Theme variables */
 import './theme/variables.css';
 
-const App: React.FC = () => (
-  <IonApp>
-    <IonReactRouter>
-      <IonTabs>
-        <IonRouterOutlet>
-          <Route exact path="/tab1">
-            <Tab1 />
-          </Route>
-          <Route exact path="/tab2">
-            <Tab2 />
-          </Route>
-          <Route path="/tab3">
-            <Tab3 />
-          </Route>
-          <Route exact path="/">
-            <Redirect to="/tab1" />
-          </Route>
-        </IonRouterOutlet>
-        <IonTabBar slot="bottom">
-          <IonTabButton tab="tab1" href="/tab1">
-            <IonIcon icon={triangle} />
-            <IonLabel>Tab 1</IonLabel>
-          </IonTabButton>
-          <IonTabButton tab="tab2" href="/tab2">
-            <IonIcon icon={ellipse} />
-            <IonLabel>Tab 2</IonLabel>
-          </IonTabButton>
-          <IonTabButton tab="tab3" href="/tab3">
-            <IonIcon icon={square} />
-            <IonLabel>Tab 3</IonLabel>
-          </IonTabButton>
-        </IonTabBar>
-      </IonTabs>
-    </IonReactRouter>
-  </IonApp>
-);
+const App: React.FC = () => {
+  // Optional parameters to pass to the swiper instance.
+  // See http://idangero.us/swiper/api/ for valid options.
+  const slideOpts = {
+    initialSlide: 0,
+    speed: 400,
+  }
+
+  async function getMe() {
+    try {
+      const data = await aituBridge.getMe();
+      setName(data.name);
+    } catch (e) {
+      // handle error
+      console.log(e);
+    }
+  };
+
+  useEffect(() => {
+    if (aituBridge.isSupported()) {
+      getMe();
+    }
+  }, []);
+
+  const [name, setName] = useState('<username>');
+
+  const handleButtonClick = () => {
+    console.log('nextSlide');
+  }
+
+  return (
+    <IonApp>
+      <IonContent>
+        <IonSlides pager={true} options={slideOpts}>
+          <IonSlide>
+            <img src="/assets/slide1.png" />
+            <div className="slide-block">
+              <IonText color="primary">
+                <h2>{`Привет, ${name}!`}</h2>
+              </IonText>
+              <p>С помощью этого мини-приложения, мы хотим показать тебе некоторые возможности платформы.</p>
+            </div>
+            <div className="slide-button">
+              <IonButton expand="full" onClick={handleButtonClick}>Интересно</IonButton>
+            </div>
+          </IonSlide>
+          <IonSlide>
+            <img src="/assets/slide2.png" />
+            <div className="slide-block">
+              <IonText color="primary">
+                <h2>Мини-приложения доступны всей аудитории Aitu</h2>
+              </IonText>
+              <p>А это +800 000 уникальных пользователей в месяц</p>
+            </div>
+            <div className="slide-button">
+              <IonButton expand="full" onClick={handleButtonClick}>Зачем это бизнесу</IonButton>
+            </div>
+          </IonSlide>
+          <IonSlide>
+            <img src="/assets/slide3.png" />
+            <div className="slide-block">
+              <IonText color="primary">
+                <h2>Легко найти</h2>
+              </IonText>
+              <p>Ваше приложение будет легко доступно всей аудитории Aitu. Каталог Aitu-приложений находится в центральной вкладке Aitu</p>
+            </div>
+            <div className="slide-button">
+              <IonButton expand="full" onClick={handleButtonClick}>Далее</IonButton>
+            </div>
+          </IonSlide>
+          <IonSlide>
+            <img src="/assets/slide4.png" />
+            <div className="slide-block">
+              <IonText color="primary">
+                <h2>Делитесь уникальными предложениями</h2>
+              </IonText>
+              <p>Донесите до всех пользователей Aitu о ваших интересных предложениях с помощью баннеров. При клике баннера откроется ваше мини-приложение</p>
+            </div>
+            <div className="slide-button">
+              <IonButton expand="full" onClick={handleButtonClick}>Далее</IonButton>
+            </div>
+          </IonSlide>
+          <IonSlide>
+            <img src="/assets/slide5.png" />
+            <div className="slide-block">
+              <IonText color="primary">
+                <h2>Коммуникация с пользователями</h2>
+              </IonText>
+              <p>Отправляйте пуш-уведомления своим пользователям</p>
+            </div>
+            <div className="slide-button">
+              <IonButton expand="full" onClick={handleButtonClick}>Отправить пуш-уведомление</IonButton>
+            </div>
+          </IonSlide>
+        </IonSlides>
+      </IonContent>
+    </IonApp>
+  );
+};
 
 export default App;
