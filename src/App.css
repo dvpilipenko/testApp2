@@ -11,6 +11,11 @@ ion-slides {
 
 .slide-block {
   padding: 0 16px;
+  text-align: left;
+}
+
+.slide-block h2 {
+  font-weight: bold;
 }
 
 .slide-button {

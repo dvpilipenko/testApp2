@@ -69,46 +69,46 @@ const App: React.FC = () => {
           <IonSlide>
             <img src="/assets/slide1.png" />
             <div className="slide-block">
-              <IonText color="primary">
-                <h2>{`Привет, ${name}!`}</h2>
+              <IonText color="dark">
+                <h2>Мини-приложения в Aitu</h2>
               </IonText>
-              <p>С помощью этого мини-приложения, мы хотим показать тебе некоторые возможности платформы.</p>
+              <IonText> <sub>Расскажем, что это и как использовать aitu.apps для своего бизнеса</sub></IonText>
+            </div>
+            <div className="slide-button">
+              <IonButton expand="full" onClick={handleButtonClick}>Я готов!</IonButton>
+            </div>
+          </IonSlide>
+          <IonSlide>
+            <img src="/assets/slide2.png" />
+            <div className="slide-block">
+              <IonText color="dark">
+                <h2>+800.000 пользователей Aitu</h2>
+              </IonText>
+              <IonText> <sub>Могут увидеть ваше мини-приложение и стать его пользователями</sub></IonText>
             </div>
             <div className="slide-button">
               <IonButton expand="full" onClick={handleButtonClick}>Интересно</IonButton>
             </div>
           </IonSlide>
           <IonSlide>
-            <img src="/assets/slide2.png" />
-            <div className="slide-block">
-              <IonText color="primary">
-                <h2>Мини-приложения доступны всей аудитории Aitu</h2>
-              </IonText>
-              <p>А это +800 000 уникальных пользователей в месяц</p>
-            </div>
-            <div className="slide-button">
-              <IonButton expand="full" onClick={handleButtonClick}>Зачем это бизнесу</IonButton>
-            </div>
-          </IonSlide>
-          <IonSlide>
             <img src="/assets/slide3.png" />
             <div className="slide-block">
-              <IonText color="primary">
-                <h2>Легко найти</h2>
+              <IonText color="dark">
+                <h2>Всегда под рукой </h2>
               </IonText>
-              <p>Ваше приложение будет легко доступно всей аудитории Aitu. Каталог Aitu-приложений находится в центральной вкладке Aitu</p>
+              <IonText> <sub>Каталог с мини-приложениями находится на центральной вкладке. Пользователи легко его найдут</sub></IonText>
             </div>
             <div className="slide-button">
-              <IonButton expand="full" onClick={handleButtonClick}>Далее</IonButton>
+              <IonButton expand="full" onClick={handleButtonClick}>Что ещё?</IonButton>
             </div>
           </IonSlide>
           <IonSlide>
             <img src="/assets/slide4.png" />
             <div className="slide-block">
-              <IonText color="primary">
-                <h2>Делитесь уникальными предложениями</h2>
+              <IonText color="dark">
+                <h2>Баннер с ваши предложением</h2>
               </IonText>
-              <p>Донесите до всех пользователей Aitu о ваших интересных предложениях с помощью баннеров. При клике баннера откроется ваше мини-приложение</p>
+              <IonText> <sub>Уникальная скидка, спецпредложение или акция. Донесите ценное предложение до всех пользователей Aitu</sub></IonText>
             </div>
             <div className="slide-button">
               <IonButton expand="full" onClick={handleButtonClick}>Далее</IonButton>
@@ -117,10 +117,10 @@ const App: React.FC = () => {
           <IonSlide>
             <img src="/assets/slide5.png" />
             <div className="slide-block">
-              <IonText color="primary">
+              <IonText color="dark">
                 <h2>Коммуникация с пользователями</h2>
               </IonText>
-              <p>Отправляйте пуш-уведомления своим пользователям</p>
+              <IonText><sub>Отправляйте пуш-уведомления своим пользователям</sub></IonText>
             </div>
             <div className="slide-button">
               <IonButton expand="full" onClick={handleButtonClick}>Отправить пуш-уведомление</IonButton>
