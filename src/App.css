@@ -6,7 +6,7 @@ ion-slides {
 .swiper-slide {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
 }
 
 .slide-block {

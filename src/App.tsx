@@ -7,6 +7,7 @@ import {
   IonContent,
   IonButton,
   IonText,
+  IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCardContent
 } from "@ionic/react";
 
 import "./App.css";
@@ -47,20 +48,17 @@ const SlideContent: React.FC<ISlideContentProps> = ({
 }) => {
   return (
     <>
-      <img src={imgSrc} />
-      <div className="slide-block">
-        <IonText color="dark">
-          <h2>{title}</h2>
-        </IonText>
-        <IonText>
-          <sub>{description}</sub>
-        </IonText>
-      </div>
-      <div className="slide-button">
-        <IonButton expand="full" onClick={onClick}>
-          {buttonTitle}
-        </IonButton>
-      </div>
+      <IonCard>
+        <IonCardHeader>
+          <img src={imgSrc}/>
+          <IonCardTitle >{title}</IonCardTitle>
+          <br/>
+          <IonCardSubtitle>{description}</IonCardSubtitle>
+        </IonCardHeader>
+        <IonCardContent>
+          <IonButton onClick={onClick}>{buttonTitle}</IonButton>
+        </IonCardContent>
+      </IonCard>
     </>
   );
 };
@@ -94,6 +92,7 @@ const App: React.FC = () => {
 
   const handleButtonClick = () => {
     slider.current?.slideNext();
+    console.log(slider.current)
   };
 
   return (
@@ -102,46 +101,35 @@ const App: React.FC = () => {
         <IonSlides pager={true} options={slideOpts} ref={slider}>
           <IonSlide>
             <SlideContent
-              title={`Привет, ${name}, Мини-приложения в Aitu`}
+              title={`Привет, ${name},Не надо вводить адрес`}
               onClick={handleButtonClick}
               description={
-                "Расскажем, что это и как использовать aitu.apps для своего бизнеса"
+                "Нужно всего лишь предоставить доступ к геолокации"
               }
-              buttonTitle={"Я готов!"}
-              imgSrc={"/assets/slide1.png"}
+              buttonTitle={"предоставить"}
+              imgSrc={"/assets/locations.svg"}
             ></SlideContent>
           </IonSlide>
           <IonSlide>
             <SlideContent
-                title={"+800.000 пользователей Aitu"}
+                title={"Не надо регистрироваться"}
                 onClick={handleButtonClick}
                 description={
-                  "Могут увидеть ваше мини-приложение и стать его пользователями"
+                  "Нужно всего лишь предоставить доступ к номеру"
                 }
-                buttonTitle={"Интересно"}
-                imgSrc={"/assets/slide2.png"}
+                buttonTitle={"предоставить"}
+                imgSrc={"/assets/person.svg"}
             ></SlideContent>
           </IonSlide>
           <IonSlide>
             <SlideContent
-                title={"Всегда под рукой "}
+                title={"Делитесь с друзьями"}
                 onClick={handleButtonClick}
                 description={
-                  "Каталог с мини-приложениями находится на центральной вкладке. Пользователи легко его найдут"
+                  "Для тех кто любит делиться"
                 }
-                buttonTitle={"Что ещё?"}
-                imgSrc={"/assets/slide3.png"}
-            ></SlideContent>
-          </IonSlide>
-          <IonSlide>
-            <SlideContent
-                title={"Баннер с ваши предложением"}
-                onClick={handleButtonClick}
-                description={
-                  "         Уникальная скидка, спецпредложение или акция. Донесите ценное предложение до всех пользователей Aitu"
-                }
-                buttonTitle={"Далее"}
-                imgSrc={"/assets/slide4.png"}
+                buttonTitle={"поделиться"}
+                imgSrc={"/assets/share.svg"}
             ></SlideContent>
           </IonSlide>
         </IonSlides>
