@@ -93,7 +93,7 @@ const App: React.FC = () => {
     if (aituBridge.isSupported()) {
       try {
         const data = await aituBridge.getPhone();
-        setPhone(data);
+        setPhone(data.phone);
         setShowPopupPhone(true);
       } catch (e) {
         console.log(e);
@@ -109,7 +109,7 @@ const App: React.FC = () => {
     latitude: number;
     longitude: number;
   }>({ latitude: 0, longitude: 0 });
-  const [phone, setPhone] = useState<{ phone: string }>({ phone: "" });
+  const [phone, setPhone] = useState('' );
 
   const handleButtonClick = () => {
     slider.current?.slideNext();
@@ -130,7 +130,7 @@ const App: React.FC = () => {
           isOpen={showPopupPhone}
           onDidDismiss={() => setShowPopupPhone(false)}
           header={"Ваше телефон"}
-          message={phone.phone}
+          message={phone}
           buttons={["Ясно"]}
         />
 
