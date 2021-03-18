@@ -52,7 +52,10 @@ const SlideContent: React.FC<ISlideContentProps> = ({
   imgSrc,
 }) => {
   return (
-    <>
+    <div className={'app-slide-content'}>
+      <div className={"app-title"}>
+        <IonCardTitle>Удобно для пользователя</IonCardTitle>
+      </div>
       <IonCard>
         <IonCardHeader>
           <img src={imgSrc} />
@@ -64,6 +67,33 @@ const SlideContent: React.FC<ISlideContentProps> = ({
           <IonButton onClick={onClick}>{buttonTitle}</IonButton>
         </IonCardContent>
       </IonCard>
+    </div>
+  );
+};
+
+const FirstSlideContent: React.FC<ISlideContentProps> = ({
+  onClick,
+  title,
+  description,
+  buttonTitle,
+  imgSrc,
+}) => {
+  return (
+    <>
+      <img src={imgSrc} />
+      <div className="slide-block">
+        <IonText color="dark">
+          <h2>{title}</h2>
+        </IonText>
+        <IonText>
+          <sub>{description}</sub>
+        </IonText>
+      </div>
+      <div className="slide-button">
+        <IonButton expand="full" onClick={onClick}>
+          {buttonTitle}
+        </IonButton>
+      </div>
     </>
   );
 };
@@ -75,7 +105,24 @@ const App: React.FC = () => {
     initialSlide: 0,
     speed: 400,
   };
+
+  useEffect(() => {
+    if (aituBridge.isSupported()) {
+      getMe();
+    }
+  }, []);
+
   const slider = useRef<HTMLIonSlidesElement>(null);
+
+  async function getMe() {
+    try {
+      const data = await aituBridge.getMe();
+      setName(data.name);
+    } catch (e) {
+      // handle error
+      console.log(e);
+    }
+  }
 
   async function getGeo() {
     if (aituBridge.isSupported()) {
@@ -89,10 +136,10 @@ const App: React.FC = () => {
     }
   }
 
-  async function share(){
+  async function share() {
     if (aituBridge.isSupported()) {
       try {
-        const data = await aituBridge.share('https://docs.aitu.io/');
+        const data = await aituBridge.share("https://docs.aitu.io/");
       } catch (e) {
         console.log(e);
       }
@@ -119,8 +166,8 @@ const App: React.FC = () => {
     latitude: number;
     longitude: number;
   }>({ latitude: 0, longitude: 0 });
-  const [phone, setPhone] = useState('' );
-
+  const [phone, setPhone] = useState("");
+  const [name, setName] = useState("<username>");
   const handleButtonClick = () => {
     slider.current?.slideNext();
     console.log(slider.current);
@@ -143,36 +190,55 @@ const App: React.FC = () => {
           message={phone}
           buttons={["Ясно"]}
         />
-
-        <IonSlides pager={true} options={slideOpts} ref={slider}>
-          <IonSlide>
-            <SlideContent
-              title={`Не надо вводить адрес`}
-              onClick={getGeo}
-              description={"Нужно всего лишь предоставить доступ к геолокации"}
-              buttonTitle={"предоставить"}
-              imgSrc={"/assets/locations.svg"}
-            ></SlideContent>
-          </IonSlide>
-          <IonSlide>
-            <SlideContent
-              title={"Не надо регистрироваться"}
-              onClick={getPhone}
-              description={"Нужно всего лишь предоставить доступ к номеру"}
-              buttonTitle={"предоставить"}
-              imgSrc={"/assets/person.svg"}
-            ></SlideContent>
-          </IonSlide>
-          <IonSlide>
-            <SlideContent
-              title={"Делитесь с друзьями"}
-              onClick={share}
-              description={"Для тех кто любит делиться"}
-              buttonTitle={"поделиться"}
-              imgSrc={"/assets/share.svg"}
-            ></SlideContent>
-          </IonSlide>
-        </IonSlides>
+            <IonSlides
+              onIonSlideWillChange={(s) => {
+                console.log(s);
+              }}
+              pager={true}
+              options={slideOpts}
+              ref={slider}
+            >
+              <IonSlide>
+                <FirstSlideContent
+                  title={`Привет, ${name}`}
+                  description={
+                    "Расскажем, что это и как использовать aitu.apps для своего бизнеса"
+                  }
+                  buttonTitle={"Я Готов!"}
+                  imgSrc={"/assets/slide1.png"}
+                  onClick={() => slider.current?.slideNext()}
+                ></FirstSlideContent>
+              </IonSlide>
+              <IonSlide>
+                <SlideContent
+                  title={`Не надо вводить адрес`}
+                  onClick={getGeo}
+                  description={
+                    "Нужно всего лишь предоставить доступ к геолокации"
+                  }
+                  buttonTitle={"предоставить"}
+                  imgSrc={"/assets/locations.svg"}
+                ></SlideContent>
+              </IonSlide>
+              <IonSlide>
+                <SlideContent
+                  title={"Не надо регистрироваться"}
+                  onClick={getPhone}
+                  description={"Нужно всего лишь предоставить доступ к номеру"}
+                  buttonTitle={"предоставить"}
+                  imgSrc={"/assets/person.svg"}
+                ></SlideContent>
+              </IonSlide>
+              <IonSlide>
+                <SlideContent
+                  title={"Делитесь с друзьями"}
+                  onClick={share}
+                  description={"Для тех кто любит делиться"}
+                  buttonTitle={"поделиться"}
+                  imgSrc={"/assets/share.svg"}
+                ></SlideContent>
+              </IonSlide>
+            </IonSlides>
       </IonContent>
     </IonApp>
   );

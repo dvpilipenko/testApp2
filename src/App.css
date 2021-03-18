@@ -2,11 +2,23 @@
 ion-slides {
   height: 100%;
 }
+.app-title {
+  padding-top: 30px;
+  display: flex;
+  height: 30%;
+  justify-content: center;
+}
+.app-slide-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: flex-start;
+}
 
 .swiper-slide {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
 }
 
 .slide-block {
