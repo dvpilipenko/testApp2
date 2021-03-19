@@ -180,7 +180,7 @@ const App: React.FC = () => {
           isOpen={showPopupPosition}
           onDidDismiss={() => setShowPopupPosition(false)}
           header={"Ваше местоположение"}
-          message={`Долгота: ${geoPosition.longitude}, Ширина: ${geoPosition.longitude}`}
+          message={`Долгота: ${geoPosition.longitude}, Ширина: ${geoPosition.latitude}`}
           buttons={["Ясно"]}
         />
         <IonAlert
