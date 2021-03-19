@@ -175,18 +175,18 @@ const App: React.FC = () => {
 
   return (
     <IonApp>
-      <IonContent>
+      <IonContent className={'content-container'}>
         <IonAlert
           isOpen={showPopupPosition}
           onDidDismiss={() => setShowPopupPosition(false)}
-          header={"Ваше метоположение"}
-          message={`Долгота: ${geoPosition.longitude}, ширина: ${geoPosition.longitude}`}
+          header={"Ваше местоположение"}
+          message={`Долгота: ${geoPosition.longitude}, Ширина: ${geoPosition.longitude}`}
           buttons={["Ясно"]}
         />
         <IonAlert
           isOpen={showPopupPhone}
           onDidDismiss={() => setShowPopupPhone(false)}
-          header={"Ваше телефон"}
+          header={"Ваш телефон"}
           message={phone}
           buttons={["Ясно"]}
         />
@@ -243,8 +243,8 @@ const App: React.FC = () => {
             <SlideContent
               title={`Не надо вводить адрес`}
               onClick={getGeo}
-              description={"Нужно всего лишь предоставить доступ к геолокации"}
-              buttonTitle={"предоставить"}
+              description={"Можно легко передать координаты"}
+              buttonTitle={"Предоставить"}
               imgSrc={"/assets/locations.svg"}
             ></SlideContent>
           </IonSlide>
@@ -253,7 +253,7 @@ const App: React.FC = () => {
               title={"Не надо регистрироваться"}
               onClick={getPhone}
               description={"Нужно всего лишь предоставить доступ к номеру"}
-              buttonTitle={"предоставить"}
+              buttonTitle={"Предоставить"}
               imgSrc={"/assets/person.svg"}
             ></SlideContent>
           </IonSlide>
@@ -262,7 +262,7 @@ const App: React.FC = () => {
               title={"Делитесь с друзьями"}
               onClick={share}
               description={"Для тех кто любит делиться"}
-              buttonTitle={"поделиться"}
+              buttonTitle={"Поделиться"}
               imgSrc={"/assets/share.svg"}
             ></SlideContent>
           </IonSlide>
